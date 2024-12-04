@@ -999,7 +999,7 @@ const input2 = `11 12 15 18 19 18
 69 68 67 65 63
 3 6 8 11 14 17 19 20`
 
-export const sumSafe = () => {
+const sumSafe = () => {
   let safeCount = 0;
   input2.split("\n").forEach((line: string) => {
     const lineArray = line.split(" ");
@@ -1022,7 +1022,7 @@ export const sumSafe = () => {
   return safeCount;
 }
 
-export const problemDamper = () => {
+const problemDamper = () => {
   let safeCount = 0;
   input2.split("\n").forEach((line: string) => {
     const lineArray = line.split(" ");
