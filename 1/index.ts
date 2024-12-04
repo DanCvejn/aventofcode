@@ -1,5 +1,4 @@
-const input = `
-80784   47731
+const input = `80784   47731
 81682   36089
 22289   41038
 79525   17481
@@ -998,10 +997,9 @@ const input = `
 75288   35237
 79742   82354
 65715   12422
-21544   29737
-`
+21544   29737`;
 
-const main = () => {
+const totalDistance = () => {
   let list1: number[] = [], list2: number[] = [];
   input.split("\n").forEach((line: string) => {
     const lineArray = line.split("   ");
@@ -1020,24 +1018,55 @@ const main = () => {
 }
 
 const similarityScoreFn = () => {
-  let list1: {[key: number]: number} = {}, list2: number[] = [];
+  let list1: number[] = [], list2: number[] = [];
   input.split("\n").forEach((line: string) => {
     const lineArray = line.split("   ");
     if (isNaN(parseInt(lineArray[0])) || isNaN(parseInt(lineArray[1]))) return;
-    list1[parseInt(lineArray[0])] = 0;
+    list1.push(parseInt(lineArray[0]));
     list2.push(parseInt(lineArray[1]));
   })
-  list2.forEach((num: number) => {
-    if (!Object.keys(list1).includes(num.toString())) return;
-    list1[num] = list1[num] + 1;
-  })
   let similarityScore = 0;
-  Object.keys(list1).forEach((num: string) => {
-    similarityScore += parseInt(num) * list1[num];
+  list1.forEach((num: number) => {
+    const count = list2.filter((numList2: number) => numList2 === num).length;
+    similarityScore += num * count;
   })
   console.log(similarityScore);
   return;
 }
 
-main();
+const atOnce = () => {
+  let list1: number[] = [], list2: number[] = [];
+  input.split("\n").forEach((line: string) => {
+    const lineArray = line.split("   ");
+    if (isNaN(parseInt(lineArray[0])) || isNaN(parseInt(lineArray[1]))) return;
+    list1.push(parseInt(lineArray[0]));
+    list2.push(parseInt(lineArray[1]));
+  })
+  list1 = list1.sort((a, b) => a - b);
+  list2 = list2.sort((a, b) => a - b);
+  let sum: number = 0, similarityScore: number = 0;
+  list1.forEach((num: number, i: number) => {
+    sum += Math.abs(list1[i] - list2[i]);
+    const count = list2.filter((numList2: number) => numList2 === num).length;
+    similarityScore += num * count;
+  })
+  console.log(sum);
+  console.log(similarityScore);
+  return;
+}
+
+totalDistance();
 similarityScoreFn();
+
+
+const times = (fnToTest: () => void) => {
+  const start = new Date().valueOf();
+  fnToTest();
+  const finalTime = new Date(new Date().valueOf() - start);
+  console.log(`${fnToTest.name} - ${finalTime.getSeconds()}s, ${finalTime.getMilliseconds()}ms`);
+  return;
+}
+
+times(totalDistance);
+times(similarityScoreFn);
+times(atOnce);
