@@ -999,7 +999,7 @@ const input2 = `11 12 15 18 19 18
 69 68 67 65 63
 3 6 8 11 14 17 19 20`
 
-const sumSafe = () => {
+export const sumSafe = () => {
   let safeCount = 0;
   input2.split("\n").forEach((line: string) => {
     const lineArray = line.split(" ");
@@ -1019,10 +1019,10 @@ const sumSafe = () => {
     }
 
   })
-  console.log(safeCount);
+  return safeCount;
 }
 
-const problemDamper = () => {
+export const problemDamper = () => {
   let safeCount = 0;
   input2.split("\n").forEach((line: string) => {
     const lineArray = line.split(" ");
@@ -1043,8 +1043,8 @@ const problemDamper = () => {
       if (i === lineArray.length - 2 && badNum <= 1) return safeCount++;
     }
   })
-  console.log(safeCount);
+  return safeCount;
 }
 
-sumSafe();
-problemDamper();
+console.log(sumSafe());
+console.log(problemDamper());

@@ -1013,8 +1013,7 @@ const totalDistance = () => {
   list1.forEach((num: number, i: number) => {
     sum += Math.abs(list1[i] - list2[i]);
   })
-  console.log(sum);
-  return;
+  return sum;
 }
 
 const similarityScoreFn = () => {
@@ -1030,8 +1029,7 @@ const similarityScoreFn = () => {
     const count = list2.filter((numList2: number) => numList2 === num).length;
     similarityScore += num * count;
   })
-  console.log(similarityScore);
-  return;
+  return similarityScore;
 }
 
 const atOnce = () => {
@@ -1050,23 +1048,9 @@ const atOnce = () => {
     const count = list2.filter((numList2: number) => numList2 === num).length;
     similarityScore += num * count;
   })
-  console.log(sum);
-  console.log(similarityScore);
-  return;
+  return { sum, similarityScore };
 }
 
-totalDistance();
-similarityScoreFn();
-
-
-const times = (fnToTest: () => void) => {
-  const start = new Date().valueOf();
-  fnToTest();
-  const finalTime = new Date(new Date().valueOf() - start);
-  console.log(`${fnToTest.name} - ${finalTime.getSeconds()}s, ${finalTime.getMilliseconds()}ms`);
-  return;
-}
-
-times(totalDistance);
-times(similarityScoreFn);
-times(atOnce);
+console.log(totalDistance());
+console.log(similarityScoreFn());
+console.log(atOnce());
