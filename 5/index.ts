@@ -1391,24 +1391,30 @@ const sumOfMiddles = () => {
 
 const fixIncorrectAndSumOfMiddles = () => {
   let sum = 0;
-  let fixedManuals: string[] = [];
   manuals.split("\n").forEach(manual => {
-    let fixed = false;
     let manualArray = manual.split(",");
-    const manualState = manual.split(",").map((num, i) => {
-      const rulesState = ruleSet.filter(rule => { return rule.after === num && manualArray.includes(rule.before) }).map(rule => {
+    let i = 0, moves = 0;
+    while (i < manualArray.length) {
+      let moved = false;jz
+      ruleSet.filter(rule => { return rule.after === manualArray[i] && manualArray.includes(rule.before) }).forEach((rule) => {
         if (manualArray.indexOf(rule.before) > manualArray.indexOf(rule.after)) {
-          fixed = true;
+          const temp = rule.before;
+          manualArray[manualArray.indexOf(rule.before)] = rule.after;
+          manualArray[manualArray.indexOf(rule.after)] = temp;
+          moved = true;
         }
       });
-      return true;
-    });
-    if (fixed) {
-      fixedManuals.push(manualArray.join(","));
-      sum += parseInt(manualArray[Math.floor(manualArray.length / 2)]);
-      fixed = false;
+      if (moved) {
+        i = 0;
+        moves++;
+      } else {
+        i++;
+      }
     }
-  })
+    if (moves > 0) {
+      sum += parseInt(manualArray[Math.ceil(manualArray.length / 2)]);
+    }
+  });
   return sum;
 }
 
