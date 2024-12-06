@@ -1395,7 +1395,7 @@ const fixIncorrectAndSumOfMiddles = () => {
     let manualArray = manual.split(",");
     let i = 0, moves = 0;
     while (i < manualArray.length) {
-      let moved = false;jz
+      let moved = false;
       ruleSet.filter(rule => { return rule.after === manualArray[i] && manualArray.includes(rule.before) }).forEach((rule) => {
         if (manualArray.indexOf(rule.before) > manualArray.indexOf(rule.after)) {
           const temp = rule.before;
