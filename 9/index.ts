@@ -63,3 +63,13 @@ const reformatDisk = () => {
 }
 
 console.log(reformatDisk());
+
+const timer = () => {
+  const start = performance.now();
+  reformatDisk();
+  const end = performance.now();
+  console.log(`Full day 9 function took ${String(end - start).slice(0, 9)} milliseconds.`);
+  return;
+}
+
+timer();

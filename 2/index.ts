@@ -1048,3 +1048,14 @@ const problemDamper = () => {
 
 console.log(sumSafe());
 console.log(problemDamper());
+
+const timer = () => {
+  const start = performance.now();
+  sumSafe();
+  // problemDamper();
+  const end = performance.now();
+  console.log(`Full day 2 function took ${String(end - start).slice(0, 5)} milliseconds.`);
+  return;
+}
+
+timer();

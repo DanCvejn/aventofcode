@@ -177,3 +177,15 @@ const searchForMas = () => {
 
 console.log(searchForXmas());
 console.log(searchForMas());
+
+
+const timer = () => {
+  const start = performance.now();
+  searchForXmas();
+  searchForMas();
+  const end = performance.now();
+  console.log(`Full day 4 function took ${String(end - start).slice(0, 5)} milliseconds.`);
+  return;
+}
+
+timer();

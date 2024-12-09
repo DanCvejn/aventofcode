@@ -999,39 +999,6 @@ const input = `80784   47731
 65715   12422
 21544   29737`;
 
-const totalDistance = () => {
-  let list1: number[] = [], list2: number[] = [];
-  input.split("\n").forEach((line: string) => {
-    const lineArray = line.split("   ");
-    if (isNaN(parseInt(lineArray[0])) || isNaN(parseInt(lineArray[1]))) return;
-    list1.push(parseInt(lineArray[0]));
-    list2.push(parseInt(lineArray[1]));
-  })
-  list1 = list1.sort((a, b) => a - b);
-  list2 = list2.sort((a, b) => a - b);
-  let sum: number = 0;
-  list1.forEach((num: number, i: number) => {
-    sum += Math.abs(list1[i] - list2[i]);
-  })
-  return sum;
-}
-
-const similarityScoreFn = () => {
-  let list1: number[] = [], list2: number[] = [];
-  input.split("\n").forEach((line: string) => {
-    const lineArray = line.split("   ");
-    if (isNaN(parseInt(lineArray[0])) || isNaN(parseInt(lineArray[1]))) return;
-    list1.push(parseInt(lineArray[0]));
-    list2.push(parseInt(lineArray[1]));
-  })
-  let similarityScore = 0;
-  list1.forEach((num: number) => {
-    const count = list2.filter((numList2: number) => numList2 === num).length;
-    similarityScore += num * count;
-  })
-  return similarityScore;
-}
-
 const atOnce = () => {
   let list1: number[] = [], list2: number[] = [];
   input.split("\n").forEach((line: string) => {
@@ -1048,9 +1015,18 @@ const atOnce = () => {
     const count = list2.filter((numList2: number) => numList2 === num).length;
     similarityScore += num * count;
   })
-  return { sum, similarityScore };
+  return { part1: sum, part2: similarityScore };
 }
 
-console.log(totalDistance());
-console.log(similarityScoreFn());
 console.log(atOnce());
+
+const timer = () => {
+  const start = performance.now();
+  atOnce();
+  const end = performance.now();
+  console.log(`Full day 1 function took ${String(end - start).slice(0, 5)} milliseconds.`);
+  return;
+}
+
+timer();
+

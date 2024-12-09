@@ -135,7 +135,6 @@ const createAntinodes = () => {
     })
   });
 
-  console.log(map2.map((line) => line.join("")).join("\n"));
   return {
     part1: sum,
     part2: sum2,
@@ -143,4 +142,16 @@ const createAntinodes = () => {
 };
 
 console.log(createAntinodes());
+
+
+
+const timer = () => {
+  const start = performance.now();
+  createAntinodes();
+  const end = performance.now();
+  console.log(`Full day 8 function took ${String(end - start).slice(0, 5)} milliseconds.`);
+  return;
+}
+
+timer();
 

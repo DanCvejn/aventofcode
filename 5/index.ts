@@ -1420,3 +1420,16 @@ const fixIncorrectAndSumOfMiddles = () => {
 
 console.log(sumOfMiddles());
 console.log(fixIncorrectAndSumOfMiddles());
+
+
+
+const timer = () => {
+  const start = performance.now();
+  sumOfMiddles();
+  // fixIncorrectAndSumOfMiddles();
+  const end = performance.now();
+  console.log(`Part 1 day 5 function took ${String(end - start).slice(0, 6)} milliseconds.`);
+  return;
+}
+
+timer();

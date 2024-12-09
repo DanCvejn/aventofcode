@@ -37,3 +37,15 @@ const multiplicationWithStopper = () => {
 
 console.log(findAndMultiply());
 console.log(multiplicationWithStopper());
+
+
+const timer = () => {
+  const start = performance.now();
+  findAndMultiply();
+  multiplicationWithStopper();
+  const end = performance.now();
+  console.log(`Full day 3 function took ${String(end - start).slice(0, 5)} milliseconds.`);
+  return;
+}
+
+timer();

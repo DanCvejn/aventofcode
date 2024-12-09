@@ -889,3 +889,14 @@ const findValidsPart2 = () => {
 console.log("Part 1: ", findValids());
 console.log("Part 2: ", findValidsPart2());
 
+const timer = () => {
+  const start = performance.now();
+  findValids();
+  findValidsPart2();
+  const end = performance.now();
+  console.log(`Full day 7 function took ${String(end - start).slice(0, 5)} milliseconds.`);
+  return;
+}
+
+timer();
+
