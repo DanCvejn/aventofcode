@@ -73,41 +73,73 @@ const getAnthenasCoords = () => {
 const createAntinodes = () => {
   const coords: { [key: string]: Coords[] }[] = getAnthenasCoords();
   let map = input8.split("\n").map((line) => line.split(""));
-  let sum = 0;
-  let usedCoords: Coords[] = [];
+  let map2 = input8.split("\n").map((line) => line.split(""));
   Object.keys(coords).forEach((char) => {
     coords[char].forEach((coord: Coords) => {
       coords[char].filter((c: Coords) => c.x !== coord.x && c.y !== coord.y).forEach((c: Coords) => {
+        const vector = {
+          x: c.x - coord.x,
+          y: c.y - coord.y,
+        };
         const possibleAntinode = {
           x: coord.x - (c.x - coord.x),
           y: coord.y - (c.y - coord.y),
+        };
+        let possibleAntinode2 = {
+          x: coord.x - vector.x,
+          y: coord.y - vector.y,
         };
         if (
           possibleAntinode.x >= 0 &&
           possibleAntinode.x < map[0].length &&
           possibleAntinode.y >= 0 &&
-          possibleAntinode.y < map.length
+          possibleAntinode.y < map.length &&
+          map[possibleAntinode.y][possibleAntinode.x] !== char
         ) {
-          if (
-            map[possibleAntinode.y][possibleAntinode.x] !== "#" &&
-            map[possibleAntinode.y][possibleAntinode.x] !== char &&
-            !usedCoords.includes(possibleAntinode)
-          ) {
-            usedCoords.push(possibleAntinode);
-            sum++;
-          }
-          if (map[possibleAntinode.y][possibleAntinode.x] === ".") {
-            map[possibleAntinode.y][possibleAntinode.x] = "#";
-          }
+          map[possibleAntinode.y][possibleAntinode.x] = "#";
+        }
+        map2[coord.y][coord.x] = "#";
+        while (
+          possibleAntinode2.x >= 0 &&
+          possibleAntinode2.x < map[0].length &&
+          possibleAntinode2.y >= 0 &&
+          possibleAntinode2.y < map.length
+        ) {
+          map2[possibleAntinode2.y][possibleAntinode2.x] = "#";
+          possibleAntinode2 = {
+            x: possibleAntinode2.x - vector.x,
+            y: possibleAntinode2.y - vector.y,
+          };
         }
       });
     });
   });
-  console.log(usedCoords.length);
 
-  console.log(map.map((line) => line.join("")).join("\n"))
+  let sum = 0;
 
-  return sum;
+  map.forEach((line) => {
+    line.forEach((char) => {
+      if (char === "#") {
+        sum++;
+      }
+    })
+  });
+
+  let sum2 = 0;
+
+  map2.forEach((line) => {
+    line.forEach((char) => {
+      if (char === "#") {
+        sum2++;
+      }
+    })
+  });
+
+  console.log(map2.map((line) => line.join("")).join("\n"));
+  return {
+    part1: sum,
+    part2: sum2,
+  };
 };
 
 console.log(createAntinodes());
